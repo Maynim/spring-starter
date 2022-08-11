@@ -1,5 +1,6 @@
 package ru.maynim.spring;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.maynim.spring.database.pool.ConnectionPool;
 import ru.maynim.spring.database.repository.CompanyRepository;
 import ru.maynim.spring.database.repository.UserRepository;
@@ -9,16 +10,10 @@ import ru.maynim.spring.service.UserService;
 public class ApplicationRunner {
 
     public static void main(String[] args) {
-        Container container = new Container();
-//        ConnectionPool connectionPool = new ConnectionPool();
-//        UserRepository userRepository = new UserRepository(connectionPool);
-//        CompanyRepository companyRepository = new CompanyRepository(connectionPool);
-//        UserService userService = new UserService(userRepository, companyRepository);
-
-        ConnectionPool connectionPool = container.get(ConnectionPool.class);
-        UserRepository userRepository = container.get(UserRepository.class);
-        CompanyRepository companyRepository = container.get(CompanyRepository.class);
-        UserService userService = container.get(UserService.class);
-        // TODO: 11.08.2022 userService
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application.xml");
+        ConnectionPool pool2 = context.getBean("p1", ConnectionPool.class);
+        System.out.println(pool2);
+        CompanyRepository companyRepository = context.getBean("companyRepository", CompanyRepository.class);
+        System.out.println(companyRepository);
     }
 }
