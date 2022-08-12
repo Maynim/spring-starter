@@ -10,10 +10,12 @@ import ru.maynim.spring.service.UserService;
 public class ApplicationRunner {
 
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application.xml");
-        ConnectionPool pool2 = context.getBean("p1", ConnectionPool.class);
-        System.out.println(pool2);
-        CompanyRepository companyRepository = context.getBean("companyRepository", CompanyRepository.class);
-        System.out.println(companyRepository);
+        CompanyRepository companyRepository;
+        try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application.xml")) {
+            ConnectionPool pool2 = context.getBean("p1", ConnectionPool.class);
+            System.out.println(pool2);
+            companyRepository = context.getBean("companyRepository", CompanyRepository.class);
+            System.out.println(companyRepository);
+        }
     }
 }
