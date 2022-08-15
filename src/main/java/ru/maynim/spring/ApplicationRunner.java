@@ -1,21 +1,23 @@
 package ru.maynim.spring;
 
+import java.io.Serializable;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.maynim.spring.database.pool.ConnectionPool;
-import ru.maynim.spring.database.repository.CompanyRepository;
-import ru.maynim.spring.database.repository.UserRepository;
-import ru.maynim.spring.ioc.Container;
-import ru.maynim.spring.service.UserService;
+import ru.maynim.spring.database.repository.CrudRepository;
 
 public class ApplicationRunner {
-
     public static void main(String[] args) {
-        CompanyRepository companyRepository;
-        try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application.xml")) {
-            ConnectionPool pool2 = context.getBean("p1", ConnectionPool.class);
-            System.out.println(pool2);
-            companyRepository = context.getBean("companyRepository", CompanyRepository.class);
-            System.out.println(companyRepository);
+        String value = "hello";
+        System.out.println(CharSequence.class.isAssignableFrom(value.getClass()));
+        System.out.println(BeanFactoryPostProcessor.class.isAssignableFrom(value.getClass()));
+        System.out.println(Serializable.class.isAssignableFrom(value.getClass()));
+        try (var context = new ClassPathXmlApplicationContext("application.xml")) {
+            var connectionPool = context.getBean("pool1", ConnectionPool.class);
+            System.out.println(connectionPool);
+
+            var companyRepository = context.getBean("companyRepository", CrudRepository.class);
+            System.out.println(companyRepository.findById(1));
         }
     }
 }
