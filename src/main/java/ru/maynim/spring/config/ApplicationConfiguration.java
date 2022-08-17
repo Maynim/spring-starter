@@ -16,11 +16,10 @@ import ru.maynim.web.config.WebConfiguration;
         basePackages = "ru.maynim.spring",
         useDefaultFilters = false,
         includeFilters = {
-                @Filter(type = FilterType.ANNOTATION, value = Component.class),
-                @Filter(type = FilterType.ASSIGNABLE_TYPE, value = CrudRepository.class),
-                @Filter(type = FilterType.REGEX, pattern = "ru\\..+Repository")
-        }
-)
+            @Filter(type = FilterType.ANNOTATION, value = Component.class),
+            @Filter(type = FilterType.ASSIGNABLE_TYPE, value = CrudRepository.class),
+            @Filter(type = FilterType.REGEX, pattern = "ru\\..+Repository")
+        })
 public class ApplicationConfiguration {
 
     @Bean

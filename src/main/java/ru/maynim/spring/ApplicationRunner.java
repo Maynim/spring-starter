@@ -6,6 +6,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import ru.maynim.spring.config.ApplicationConfiguration;
 import ru.maynim.spring.database.pool.ConnectionPool;
 import ru.maynim.spring.database.repository.CrudRepository;
+import ru.maynim.spring.service.CompanyService;
 
 public class ApplicationRunner {
     public static void main(String[] args) {
@@ -18,12 +19,11 @@ public class ApplicationRunner {
             context.getEnvironment().setActiveProfiles("web", "prod");
             context.refresh();
 
-
             var connectionPool = context.getBean("pool1", ConnectionPool.class);
             System.out.println(connectionPool);
 
-            var companyRepository = context.getBean("companyRepository", CrudRepository.class);
-            System.out.println(companyRepository.findById(1));
+            var companyService = context.getBean(CompanyService.class);
+            System.out.println(companyService.findById(1));
         }
     }
 }
