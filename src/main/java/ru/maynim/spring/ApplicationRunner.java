@@ -1,24 +1,23 @@
 package ru.maynim.spring;
 
+import java.io.Serializable;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.maynim.spring.database.pool.ConnectionPool;
-import ru.maynim.spring.database.repository.CompanyRepository;
-import ru.maynim.spring.database.repository.UserRepository;
-import ru.maynim.spring.ioc.Container;
-import ru.maynim.spring.service.UserService;
+import ru.maynim.spring.database.repository.CrudRepository;
 
 public class ApplicationRunner {
-
     public static void main(String[] args) {
-        Container container = new Container();
-//        ConnectionPool connectionPool = new ConnectionPool();
-//        UserRepository userRepository = new UserRepository(connectionPool);
-//        CompanyRepository companyRepository = new CompanyRepository(connectionPool);
-//        UserService userService = new UserService(userRepository, companyRepository);
+        String value = "hello";
+        System.out.println(CharSequence.class.isAssignableFrom(value.getClass()));
+        System.out.println(BeanFactoryPostProcessor.class.isAssignableFrom(value.getClass()));
+        System.out.println(Serializable.class.isAssignableFrom(value.getClass()));
+        try (var context = new ClassPathXmlApplicationContext("application.xml")) {
+            var connectionPool = context.getBean("pool1", ConnectionPool.class);
+            System.out.println(connectionPool);
 
-        ConnectionPool connectionPool = container.get(ConnectionPool.class);
-        UserRepository userRepository = container.get(UserRepository.class);
-        CompanyRepository companyRepository = container.get(CompanyRepository.class);
-        UserService userService = container.get(UserService.class);
-        // TODO: 11.08.2022 userService
+            var companyRepository = context.getBean("companyRepository", CrudRepository.class);
+            System.out.println(companyRepository.findById(1));
+        }
     }
 }
