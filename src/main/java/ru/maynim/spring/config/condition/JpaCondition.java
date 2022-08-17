@@ -14,6 +14,5 @@ public class JpaCondition implements Condition {
         } catch (ClassNotFoundException e) {
             return false;
         }
-
     }
 }

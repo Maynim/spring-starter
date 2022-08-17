@@ -2,24 +2,12 @@ package ru.maynim.spring.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
-import org.springframework.context.annotation.ComponentScan.Filter;
-import org.springframework.stereotype.Component;
 import ru.maynim.spring.database.pool.ConnectionPool;
-import ru.maynim.spring.database.repository.CrudRepository;
 import ru.maynim.spring.database.repository.UserRepository;
 import ru.maynim.web.config.WebConfiguration;
 
 @Import(WebConfiguration.class)
 @Configuration
-@PropertySource("classpath:application.properties")
-@ComponentScan(
-        basePackages = "ru.maynim.spring",
-        useDefaultFilters = false,
-        includeFilters = {
-            @Filter(type = FilterType.ANNOTATION, value = Component.class),
-            @Filter(type = FilterType.ASSIGNABLE_TYPE, value = CrudRepository.class),
-            @Filter(type = FilterType.REGEX, pattern = "ru\\..+Repository")
-        })
 public class ApplicationConfiguration {
 
     @Bean
