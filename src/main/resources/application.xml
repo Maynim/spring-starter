@@ -10,7 +10,6 @@
     <context:component-scan base-package="ru.maynim.spring"
                             annotation-config="true"
                             scoped-proxy="no"
-                            scope-resolver=""
     />
 
     <context:property-placeholder location="classpath:application.properties"/>
