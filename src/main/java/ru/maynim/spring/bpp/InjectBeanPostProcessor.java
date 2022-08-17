@@ -1,7 +1,6 @@
 package ru.maynim.spring.bbp;
 
 import java.util.Arrays;
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
