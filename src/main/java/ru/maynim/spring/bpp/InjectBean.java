@@ -1,4 +1,4 @@
-package ru.maynim.spring.bbp;
+package ru.maynim.spring.bpp;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -5,8 +5,8 @@ import java.util.Optional;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
-import ru.maynim.spring.bbp.Auditing;
-import ru.maynim.spring.bbp.Transaction;
+import ru.maynim.spring.bpp.Auditing;
+import ru.maynim.spring.bpp.Transaction;
 import ru.maynim.spring.database.entity.Company;
 import ru.maynim.spring.database.pool.ConnectionPool;
 
