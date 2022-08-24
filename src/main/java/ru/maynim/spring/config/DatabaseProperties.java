@@ -1,11 +1,10 @@
 package ru.maynim.spring.config;
 
+import java.util.List;
+import java.util.Map;
 import lombok.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConstructorBinding;
-
-import java.util.List;
-import java.util.Map;
 
 @Value
 @ConstructorBinding

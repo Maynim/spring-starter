@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import ru.maynim.spring.bpp.Auditing;
@@ -11,6 +12,7 @@ import ru.maynim.spring.bpp.Transaction;
 import ru.maynim.spring.database.entity.Company;
 import ru.maynim.spring.database.pool.ConnectionPool;
 
+@Slf4j
 @Transaction
 @Auditing
 @Repository
@@ -25,7 +27,7 @@ public class CompanyRepository implements CrudRepository<Integer, Company> {
 
     @PostConstruct
     private void init() {
-        System.out.println("init company repository");
+        log.warn("init company repository");
     }
 
     @Override
