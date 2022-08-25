@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.context.ApplicationEventPublisher;
 import ru.maynim.spring.database.entity.Company;
-import ru.maynim.spring.database.repository.CrudRepository;
+import ru.maynim.spring.database.repository.CompanyRepository;
 import ru.maynim.spring.dto.CompanyReadDto;
 import ru.maynim.spring.listener.entity.EntityEvent;
 
@@ -24,7 +24,7 @@ class CompanyServiceTest {
 
     private static final Integer COMPANY_ID = 1;
 
-    @Mock private CrudRepository<Integer, Company> companyRepository;
+    @Mock private CompanyRepository companyRepository;
     @Mock private UserService userService;
     @Mock private ApplicationEventPublisher eventPublisher;
 
