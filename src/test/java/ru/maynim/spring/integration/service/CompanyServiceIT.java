@@ -12,19 +12,19 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-//@ExtendWith(SpringExtension.class)
-//@ContextConfiguration(
+// @ExtendWith(SpringExtension.class)
+// @ContextConfiguration(
 //        classes = ApplicationRunner.class,
 //        initializers = ConfigDataApplicationContextInitializer.class
-//)
+// )
 @IT
 @RequiredArgsConstructor
 public class CompanyServiceIT {
 
     private static final Integer COMPANY_ID = 1;
 
-    final private CompanyService companyService;
-    final private DatabaseProperties databaseProperties;
+    private final CompanyService companyService;
+    private final DatabaseProperties databaseProperties;
 
     @Test
     void findById() {
@@ -35,5 +35,4 @@ public class CompanyServiceIT {
         CompanyReadDto expectedResult = new CompanyReadDto(COMPANY_ID);
         actualResult.ifPresent(actual -> assertEquals(expectedResult, actual));
     }
-
 }

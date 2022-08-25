@@ -1,8 +1,5 @@
 package ru.maynim.spring.database.repository;
 
-import java.util.List;
-import java.util.Optional;
-import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +8,11 @@ import ru.maynim.spring.bpp.Auditing;
 import ru.maynim.spring.bpp.Transaction;
 import ru.maynim.spring.database.entity.Company;
 import ru.maynim.spring.database.pool.ConnectionPool;
+
+import javax.annotation.PostConstruct;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Transaction
@@ -33,7 +35,7 @@ public class CompanyRepository implements CrudRepository<Integer, Company> {
     @Override
     public Optional<Company> findById(Integer id) {
         System.out.println("findById method...");
-        return Optional.of(new Company(id));
+        return Optional.of(new Company(id, null, Collections.emptyMap()));
     }
 
     @Override
