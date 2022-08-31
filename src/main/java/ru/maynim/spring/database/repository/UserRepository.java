@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 import ru.maynim.spring.database.entity.Role;
 import ru.maynim.spring.database.entity.User;
+import ru.maynim.spring.dto.PersonalInfo2;
 
 import javax.persistence.LockModeType;
 import javax.persistence.QueryHint;
@@ -42,4 +43,20 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "select u from User u",
            countQuery = "select count(distinct u.firstname) from User u")
     Page<User> findAllBy(Pageable pageable);
+
+    // List<PersonalInfo> findAllByCompanyId(Integer companyId);
+
+    // <T> List<T> findAllByCompanyId(Integer companyId, Class<T> clazz);
+
+    @Query(value = "SELECT firstname," +
+            "lastname," +
+            "birth_date birthDate " +
+            "FROM users WHERE company_id =:companyId",
+            nativeQuery = true)
+    List<PersonalInfo2> findAllByCompanyId(Integer companyId);
+
+
+
+
+
 }

@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import ru.maynim.spring.database.entity.Role;
 import ru.maynim.spring.database.entity.User;
 import ru.maynim.spring.database.repository.UserRepository;
+import ru.maynim.spring.dto.PersonalInfo2;
 import ru.maynim.spring.integration.annotation.IT;
 
 import java.time.LocalDate;
@@ -22,6 +23,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class UserRepositoryTest {
 
     private final UserRepository userRepository;
+
+    @Test
+    void checkProjections() {
+        List<PersonalInfo2> users = userRepository.findAllByCompanyId(1);
+        assertThat(users).hasSize(2);
+        System.out.println();
+    }
 
     @Test
     void checkPageable() {
