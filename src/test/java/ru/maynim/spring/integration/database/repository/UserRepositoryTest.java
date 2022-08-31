@@ -2,6 +2,7 @@ package ru.maynim.spring.integration.database.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import ru.maynim.spring.database.entity.Role;
@@ -24,9 +25,14 @@ class UserRepositoryTest {
 
     @Test
     void checkPageable() {
-        PageRequest pageable = PageRequest.of(1, 2, Sort.by("id"));
-        List<User> result = userRepository.findAllBy(pageable);
-        assertThat(result).hasSize(2);
+        PageRequest pageable = PageRequest.of(0, 2, Sort.by("id"));
+        Page<User> slice = userRepository.findAllBy(pageable);
+        slice.forEach(user -> System.out.println(user.getId()));
+
+        while (slice.hasNext()) {
+            slice = userRepository.findAllBy(slice.nextPageable());
+            slice.forEach(user -> System.out.println(user.getId()));
+        }
     }
 
     @Test
