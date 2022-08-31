@@ -11,15 +11,14 @@ import java.util.Map;
 
 @NamedQuery(
         name = "Company.findByName",
-        query = "SELECT c FROM Company c WHERE lower(c.name) = lower(:name)"
-)
+        query = "SELECT c FROM Company c WHERE lower(c.name) = lower(:name)")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "company")
-public class Company implements BaseEntity<Integer>{
+public class Company implements BaseEntity<Integer> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

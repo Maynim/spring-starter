@@ -1,5 +1,12 @@
 package ru.maynim.spring.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+
+import java.util.Collections;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -10,14 +17,6 @@ import ru.maynim.spring.database.entity.Company;
 import ru.maynim.spring.database.repository.CompanyRepository;
 import ru.maynim.spring.dto.CompanyReadDto;
 import ru.maynim.spring.listener.entity.EntityEvent;
-
-import java.util.Collections;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class CompanyServiceTest {
@@ -32,7 +31,9 @@ class CompanyServiceTest {
 
     @Test
     void findById() {
-        doReturn(Optional.of(new Company(COMPANY_ID, null, Collections.emptyMap()))).when(companyRepository).findById(COMPANY_ID);
+        doReturn(Optional.of(new Company(COMPANY_ID, null, Collections.emptyMap())))
+                .when(companyRepository)
+                .findById(COMPANY_ID);
 
         Optional<CompanyReadDto> actualResult = companyService.findById(COMPANY_ID);
 

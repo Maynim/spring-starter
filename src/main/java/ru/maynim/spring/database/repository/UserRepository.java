@@ -1,17 +1,20 @@
 package ru.maynim.spring.database.repository;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Scope;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import ru.maynim.spring.database.pool.ConnectionPool;
+import ru.maynim.spring.database.entity.User;
+
+import java.util.List;
 
 @Repository
-@Scope(BeanDefinition.SCOPE_PROTOTYPE)
-@RequiredArgsConstructor
-public class UserRepository {
+public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Qualifier("pool2")
-    private final ConnectionPool connectionPool;
+    @Query(
+            "SELECT u FROM User u WHERE u.firstname LIKE %:firstname% and u.lastname LIKE"
+                    + " %:lastname%")
+    List<User> findAllBy(String firstname, String lastname);
+
+    @Query(value = "SELECT u.* FROM users u WHERE u.username = :username", nativeQuery = true)
+    List<User> findAllByUsername(String username);
 }

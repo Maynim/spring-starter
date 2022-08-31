@@ -8,7 +8,7 @@ import ru.maynim.spring.service.UserService;
 
 @IT
 @RequiredArgsConstructor
-//@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+// @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class UserServiceIT {
 
     private final UserService userService;

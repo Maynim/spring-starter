@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "chat")
-public class Chat implements BaseEntity<Long>{
+public class Chat implements BaseEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,5 +26,5 @@ public class Chat implements BaseEntity<Long>{
 
     @Builder.Default
     @OneToMany(mappedBy = "chat")
-    private List<UserChat> userChats= new ArrayList<>();
+    private List<UserChat> userChats = new ArrayList<>();
 }
