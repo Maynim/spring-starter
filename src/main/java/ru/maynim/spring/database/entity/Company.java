@@ -9,6 +9,10 @@ import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
 
+@NamedQuery(
+        name = "Company.findByName",
+        query = "SELECT c FROM Company c WHERE lower(c.name) = lower(:name)"
+)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
