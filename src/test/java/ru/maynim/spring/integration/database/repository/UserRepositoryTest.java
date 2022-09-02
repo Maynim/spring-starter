@@ -5,10 +5,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.test.annotation.Commit;
 import ru.maynim.spring.database.entity.Role;
 import ru.maynim.spring.database.entity.User;
 import ru.maynim.spring.database.repository.UserRepository;
 import ru.maynim.spring.dto.PersonalInfo2;
+import ru.maynim.spring.dto.UserFilter;
 import ru.maynim.spring.integration.annotation.IT;
 
 import java.time.LocalDate;
@@ -23,6 +25,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class UserRepositoryTest {
 
     private final UserRepository userRepository;
+
+    @Test
+    @Commit
+    void checkAuditing() {
+        User ivan = userRepository.findById(1L).get();
+        ivan.setBirthDate(ivan.getBirthDate().plusYears(1L));
+        userRepository.flush();
+        System.out.println();
+    }
+
+    @Test
+    void checkCustomImplementation() {
+        UserFilter filter = new UserFilter(null, "%ov%", LocalDate.now());
+        List<User> users = userRepository.findAllByFilter(filter);
+        System.out.println();
+    }
 
     @Test
     void checkProjections() {
