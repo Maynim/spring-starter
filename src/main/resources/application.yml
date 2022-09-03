@@ -28,6 +28,7 @@ logging:
   level:
     root: INFO
     ru.maynim.spring.database.pool: INFO
+    org.springframework.jdbc.core: TRACE
 
 spring:
   datasource:
