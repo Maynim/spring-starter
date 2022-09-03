@@ -9,6 +9,7 @@ import org.springframework.test.annotation.Commit;
 import ru.maynim.spring.database.entity.Role;
 import ru.maynim.spring.database.entity.User;
 import ru.maynim.spring.database.repository.UserRepository;
+import ru.maynim.spring.dto.PersonalInfo;
 import ru.maynim.spring.dto.PersonalInfo2;
 import ru.maynim.spring.dto.UserFilter;
 import ru.maynim.spring.integration.annotation.IT;
@@ -25,6 +26,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class UserRepositoryTest {
 
     private final UserRepository userRepository;
+
+    @Test
+    void checkBatch() {
+        List<User> all = userRepository.findAll();
+        userRepository.updateCompanyAndRole(all);
+
+    }
+
+    @Test
+    void checkJdbcTemplate() {
+        List<PersonalInfo> users = userRepository.findAllByCompanyIdAndRole(1, Role.USER);
+        assertThat(users).hasSize(2);
+    }
 
     @Test
     @Commit
