@@ -28,6 +28,13 @@ class UserRepositoryTest {
     private final UserRepository userRepository;
 
     @Test
+    void checkBatch() {
+        List<User> all = userRepository.findAll();
+        userRepository.updateCompanyAndRole(all);
+
+    }
+
+    @Test
     void checkJdbcTemplate() {
         List<PersonalInfo> users = userRepository.findAllByCompanyIdAndRole(1, Role.USER);
         assertThat(users).hasSize(2);
