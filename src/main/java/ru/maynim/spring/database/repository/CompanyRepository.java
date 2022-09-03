@@ -1,43 +1,22 @@
 package ru.maynim.spring.database.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+import ru.maynim.spring.database.entity.Company;
+
 import java.util.List;
 import java.util.Optional;
-import javax.annotation.PostConstruct;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Repository;
-import ru.maynim.spring.bpp.Auditing;
-import ru.maynim.spring.bpp.Transaction;
-import ru.maynim.spring.database.entity.Company;
-import ru.maynim.spring.database.pool.ConnectionPool;
 
-@Slf4j
-@Transaction
-@Auditing
 @Repository
-@RequiredArgsConstructor
-public class CompanyRepository implements CrudRepository<Integer, Company> {
+public interface CompanyRepository extends JpaRepository<Company, Integer> {
 
-    private final ConnectionPool pool1;
-    private final List<ConnectionPool> pools;
+    // Optional, Entity, Future
+    // @Query(name = "Company.findByName")
+    @Query("SELECT c FROM Company c JOIN FETCH c.locales cl WHERE c.name = :name")
+    Optional<Company> findByName(@Param("name") String name);
 
-    @Value("${db.pool.size}")
-    private final Integer poolSize;
-
-    @PostConstruct
-    private void init() {
-        log.warn("init company repository");
-    }
-
-    @Override
-    public Optional<Company> findById(Integer id) {
-        System.out.println("findById method...");
-        return Optional.of(new Company(id));
-    }
-
-    @Override
-    public void delete(Company entity) {
-        System.out.println("delete method...");
-    }
+    // Collection, Stream (batch, close)
+    List<Company> findAllByNameContainingIgnoreCase(String fragment);
 }
