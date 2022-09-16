@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Commit;
+import org.springframework.test.context.jdbc.Sql;
 import ru.maynim.spring.database.entity.Role;
 import ru.maynim.spring.database.entity.User;
 import ru.maynim.spring.database.repository.UserRepository;
@@ -22,6 +23,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @IT
+@Sql({
+    "classpath:sql/data.sql"
+})
 @RequiredArgsConstructor
 class UserRepositoryTest {
 
